@@ -1,0 +1,243 @@
+*   [33m43db963[m[33m ([m[1;36mHEAD -> [m[1;32mtest_comment_delete[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Merge branch 'add-watcher-to-ticket' into 'master'
+[31m|[m[32m\[m  
+[31m|[m * [33mcd592ff[m[33m ([m[1;31morigin/add-watcher-to-ticket[m[33m)[m Added add-watcher-to-ticket handler
+[31m|[m[31m/[m  
+*   [33m204854f[m Merge branch 'get_users_from_queue' into 'master'
+[33m|[m[34m\[m  
+[33m|[m * [33ma94c9c5[m Get users from queue
+[33m|[m[33m/[m  
+*   [33m5c48711[m Merge branch 'test_comment' into 'master'
+[35m|[m[36m\[m  
+[35m|[m * [33mdec48ac[m[33m ([m[1;31morigin/test_comment[m[33m, [m[1;32mtest_comment[m[33m)[m renamed functional test
+[35m|[m * [33m83e4806[m Redundant LOGS were deleted
+[35m|[m * [33m6a0b837[m GET comment by id: functional tests has been added
+[35m|[m[35m/[m  
+* [33mf74d251[m cmake fix
+*   [33mc74a696[m Merge branch 'getAllQuees_fix' into 'master'
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33mda9c847[m INNER -> LEFT (join)
+[1;31m|[m[1;31m/[m  
+*   [33m20ebfdb[m Merge branch 'tests' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m25af32c[m Fixed comma
+[1;33m|[m * [33m09f134a[m add session_id fxiture
+[1;33m|[m * [33m134ed2c[m fix makeFIle for tests
+[1;33m|[m * [33m803170c[m Удален метод register_and_login
+[1;33m|[m * [33m9adc87b[m Добавлена фикстура session_id
+* [1;34m|[m   [33m97c1075[m Merge branch 'v1-comments-POST' into 'master'
+[1;35m|[m[1;36m\[m [1;34m\[m  
+[1;35m|[m * [1;34m|[m [33m25f3378[m [POST] ticket comments
+[1;35m|[m[1;35m/[m [1;34m/[m  
+* [1;34m|[m   [33m8b3b3c8[m Merge branch 'fixed-comma' into 'master'
+[1;34m|[m[32m\[m [1;34m\[m  
+[1;34m|[m [32m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m[32m|[m   
+[1;34m|[m * [33m41e1489[m Fixed comma
+[1;34m|[m[1;34m/[m  
+*   [33m16b90b6[m Merge branch 'fixture' into 'master'
+[33m|[m[34m\[m  
+[33m|[m * [33mb169e16[m add fixture
+* [34m|[m   [33m899cc82[m Merge branch 'Statuses' into 'master'
+[35m|[m[36m\[m [34m\[m  
+[35m|[m * [34m|[m [33m5b2f159[m fix CMakeLists
+[35m|[m * [34m|[m [33m1254109[m Добавлены методы для работы со статусами
+[35m|[m [34m|[m[34m/[m  
+* [34m|[m   [33mdb46f7c[m Merge branch 'v1-comments-GET' into 'master'
+[34m|[m[1;32m\[m [34m\[m  
+[34m|[m [1;32m|[m[34m/[m  
+[34m|[m[34m/[m[1;32m|[m   
+[34m|[m * [33m824468b[m fix error static_config.yaml
+[34m|[m * [33m2a887f2[m [GET] ticket comments
+[34m|[m[34m/[m  
+*   [33mcebfc27[m Merge branch 'add_post_queues' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m671a3d3[m Add post queues
+[1;33m|[m[1;33m/[m  
+*   [33maa66a5a[m Merge branch 'delete-user-from-queue' into 'master'
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33m90bb85d[m Added delete-user-from-queue handler
+[1;35m|[m[1;35m/[m  
+*   [33mb48bf29[m Merge branch 'update-comment' into 'master'
+[31m|[m[32m\[m  
+[31m|[m * [33me648aec[m Update-comment handler has been added
+[31m|[m[31m/[m  
+*   [33me795f9c[m Merge branch 'add_user_to_queue' into 'master'
+[33m|[m[34m\[m  
+[33m|[m * [33m6df3581[m Added add-user-to-queue handler
+[33m|[m[33m/[m  
+*   [33m446c982[m Merge branch 'del_comment' into 'master'
+[35m|[m[36m\[m  
+[35m|[m * [33m64551f4[m Delete-comment handler has been added
+[35m|[m[35m/[m  
+*   [33m51dd433[m Merge branch 'run_as_user_fixed' into 'master'
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m8852e35[m Added access rights to execute
+[1;31m|[m[1;31m/[m  
+*   [33m45d9329[m Merge branch 'comments_section' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m578b98a[m Changed comments structure and fixed compile errors
+[1;33m|[m[1;33m/[m  
+*   [33m3869e91[m Merge branch 'get-queue' into 'master'
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33mdf8282b[m Refactoring queues handlers
+[1;35m|[m * [33m5766a6d[m Added get-queue handler
+* [1;36m|[m   [33mbad533c[m Merge branch 'add_unregister' into 'master'
+[1;36m|[m[32m\[m [1;36m\[m  
+[1;36m|[m [32m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m[32m|[m   
+[1;36m|[m * [33m92918bf[m Update files and add handler to unregister user
+[1;36m|[m[1;36m/[m  
+*   [33m7fc409d[m Merge branch 'update-queue' into 'master'
+[33m|[m[34m\[m  
+[33m|[m * [33mbe93557[m Added update queue handler
+[33m|[m[33m/[m  
+*   [33maded0cb[m Merge branch 'delete-queue' into 'master'
+[35m|[m[36m\[m  
+[35m|[m * [33ma2b4a2b[m Added delete-queue handler
+[35m|[m[35m/[m  
+*   [33mb006213[m Merge branch 'add_register_and_login' into 'master'
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m5a8d87b[m Add register and login
+[1;31m|[m[1;31m/[m  
+*   [33m6a121ba[m Merge branch 'get-queues' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m15d3a49[m Added get-queues handler
+* [1;34m|[m   [33m9b1ced9[m Merge branch 'change_openapi' into 'master'
+[1;34m|[m[1;36m\[m [1;34m\[m  
+[1;34m|[m [1;36m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m[1;36m|[m   
+[1;34m|[m * [33mde5ba0c[m Change json to form-data for login and register
+[1;34m|[m[1;34m/[m  
+*   [33m0dafd1b[m Merge branch 'create/delete_query' into 'master'
+[31m|[m[32m\[m  
+[31m|[m *   [33m279f0a9[m Merge branch 'master' into 'create/delete_query'
+[31m|[m [33m|[m[31m\[m  
+[31m|[m [33m|[m[31m/[m  
+[31m|[m[31m/[m[33m|[m   
+* [33m|[m   [33ma225dd4[m Merge branch 'openApi_branch' into 'master'
+[35m|[m[36m\[m [33m\[m  
+[35m|[m * [33m|[m [33m75686f0[m object "status" added
+[35m|[m * [33m|[m [33m2e0b418[m merged openApi file
+* [36m|[m [33m|[m   [33m53c8b69[m Merge branch 'migrations' into 'master'
+[36m|[m[1;32m\[m [36m\[m [33m\[m  
+[36m|[m [1;32m|[m[36m/[m [33m/[m  
+[36m|[m[36m/[m[1;32m|[m [33m|[m   
+[36m|[m * [33m|[m [33m474fc52[m[33m ([m[1;31morigin/migrations[m[33m)[m enum type fix migrations
+[36m|[m * [33m|[m [33mdb2c4d6[m makefile modify for migrations
+[36m|[m * [33m|[m [33m31daa3c[m makefile update
+[36m|[m * [33m|[m [33md1fd6f9[m migrations delete/create/insert
+[36m|[m * [33m|[m [33m0a27cbe[m serials for create schema
+[36m|[m * [33m|[m [33m73b5a0f[m create schema+table
+* [1;32m|[m [33m|[m   [33me675bcc[m Merge branch 'open_api-2' into 'master'
+[1;33m|[m[1;34m\[m [1;32m\[m [33m\[m  
+[1;33m|[m * [1;32m\[m [33m\[m   [33me7c2167[m Merge branch 'master' into 'open_api-2'
+[1;33m|[m [1;35m|[m[1;33m\[m [1;32m\[m [33m\[m  
+[1;33m|[m [1;35m|[m[1;33m/[m [1;32m/[m [33m/[m  
+[1;33m|[m[1;33m/[m[1;35m|[m [1;32m|[m [33m|[m   
+* [1;35m|[m [1;32m|[m [33m|[m   [33ma32ba11[m Merge branch 'open_api-2' into 'master'
+[31m|[m[32m\[m [1;35m\[m [1;32m\[m [33m\[m  
+[31m|[m * [1;35m\[m [1;32m\[m [33m\[m   [33m7fb720a[m Merge branch 'master' into 'open_api-2'
+[31m|[m [33m|[m[31m\[m [1;35m\[m [1;32m\[m [33m\[m  
+[31m|[m [33m|[m[31m/[m [1;35m/[m [1;32m/[m [33m/[m  
+[31m|[m[31m/[m[33m|[m [1;35m|[m [1;32m|[m [33m|[m   
+* [33m|[m [1;35m|[m [1;32m|[m [33m|[m   [33m7644298[m Merge branch 'open_api_3' into 'master'
+[1;32m|[m[36m\[m [33m\[m [1;35m\[m [1;32m\[m [33m\[m  
+[1;32m|[m [36m|[m[1;32m_[m[33m|[m[1;32m_[m[1;35m|[m[1;32m/[m [33m/[m  
+[1;32m|[m[1;32m/[m[36m|[m [33m|[m [1;35m|[m [33m|[m   
+[1;32m|[m * [33m|[m [1;35m|[m [33m|[m [33mb303356[m fix: merged v1/comment with v1/comments
+[1;32m|[m * [33m|[m [1;35m|[m [33m|[m [33m0502b91[m versions have been added
+[1;32m|[m * [33m|[m [1;35m|[m [33m|[m [33mb01c5bf[m Update: added queue endpoint
+[1;32m|[m * [33m|[m [1;35m|[m [33m|[m [33mfc77c9b[m Added comment api
+* [36m|[m [33m|[m [1;35m|[m [33m|[m   [33me4e2f2e[m Merge branch 'refactor_static_config' into 'master'
+[1;31m|[m[1;32m\[m [36m\[m [33m\[m [1;35m\[m [33m\[m  
+[1;31m|[m * [36m|[m [33m|[m [1;35m|[m [33m|[m [33ma9dace3[m Removed bookmarks endpoints from static config
+[1;31m|[m[1;31m/[m [36m/[m [33m/[m [1;35m/[m [33m/[m  
+* [36m|[m [33m|[m [1;35m|[m [33m|[m   [33m71acccf[m Merge branch 'refactor_auth' into 'master'
+[1;33m|[m[1;34m\[m [36m\[m [33m\[m [1;35m\[m [33m\[m  
+[1;33m|[m * [36m|[m [33m|[m [1;35m|[m [33m|[m [33m767daf5[m Renamed email to login and changed schema task-tracker to tracker
+[1;33m|[m[1;33m/[m [36m/[m [33m/[m [1;35m/[m [33m/[m  
+[1;33m|[m [36m|[m [33m|[m * [33m|[m [33m5c57741[m fix tabs for enum
+[1;33m|[m [36m|[m [33m|[m * [33m|[m [33m4aa3873[m fix '-'
+[1;33m|[m [36m|[m [33m|[m * [33m|[m [33mcb35e47[m merge 2 and 3 openapi. fix syntax
+[1;33m|[m [36m|[m [33m|[m * [33m|[m [33m7dcdf87[m fix syntax
+[1;33m|[m [36m|[m [33m|[m[33m/[m [33m/[m  
+[1;33m|[m [36m|[m * [33m|[m [33md45b797[m добавлено версионирование ручек
+[1;33m|[m [36m|[m * [33m|[m [33m03ce76c[m fix required fields
+[1;33m|[m [36m|[m * [33m|[m [33ma9268f7[m fix _id prefix
+[1;33m|[m [36m|[m * [33m|[m [33m2833116[m fix enum
+[1;33m|[m [36m|[m * [33m|[m [33m3038501[m микрофикс
+[1;33m|[m [36m|[m * [33m|[m [33m53f3085[m микрофикс синтаксиса
+[1;33m|[m [36m|[m * [33m|[m [33m77a7ccb[m Описаны openApi для ticket
+[1;33m|[m [36m|[m * [33m|[m [33m61612b6[m Описана сущность queue
+[1;33m|[m [36m|[m * [33m|[m [33m302ad35[m Описана сущность ticket в openApi
+[1;33m|[m [36m|[m[36m/[m [33m/[m  
+[1;33m|[m [36m|[m * [33mfff38b1[m ADD: models. FIX: queries definition
+[1;33m|[m [36m|[m * [33m30a87d1[m rebase create/delete_query
+[1;33m|[m [36m|[m * [33m945dc43[m object "status" added
+[1;33m|[m [36m|[m * [33m7e785ee[m rebase query_branch
+[1;33m|[m [36m|[m * [33m3d8f45b[m enum type fix migrations
+[1;33m|[m [36m|[m * [33m6f474fe[m makefile modify for migrations
+[1;33m|[m [36m|[m * [33me939402[m makefile update
+[1;33m|[m [36m|[m * [33mca3d8e1[m migrations delete/create/insert
+[1;33m|[m [36m|[m * [33mb219805[m serials for create schema
+[1;33m|[m [36m|[m * [33m6ae7e8d[m create schema+table
+[1;33m|[m [36m|[m * [33ma651fbe[m fix: merged v1/comment with v1/comments
+[1;33m|[m [36m|[m * [33m40b8188[m remove trash
+[1;33m|[m [36m|[m * [33m1da4030[m remove trash
+[1;33m|[m [36m|[m * [33mc0e530b[m Removed bookmarks endpoints from static config
+[1;33m|[m [36m|[m * [33m1f851c6[m Renamed email to login and changed schema task-tracker to tracker
+[1;33m|[m [36m|[m * [33m1445b88[m fix tabs for enum
+[1;33m|[m [36m|[m * [33mac3a37a[m fix '-'
+[1;33m|[m [36m|[m * [33m72572a4[m merge 2 and 3 openapi. fix syntax
+[1;33m|[m [36m|[m * [33maa064d8[m fix syntax
+[1;33m|[m [36m|[m * [33m03fa785[m добавлено версионирование ручек
+[1;33m|[m [36m|[m * [33mcefa6f1[m fix required fields
+[1;33m|[m [36m|[m * [33md46b5e0[m fix _id prefix
+[1;33m|[m [36m|[m * [33m796be0e[m fix enum
+[1;33m|[m [36m|[m * [33mbed1ff1[m микрофикс
+[1;33m|[m [36m|[m * [33ma4bda06[m микрофикс синтаксиса
+[1;33m|[m [36m|[m * [33m4f460cd[m Описаны openApi для ticket
+[1;33m|[m [36m|[m * [33me5f8f35[m Описана сущность queue
+[1;33m|[m [36m|[m * [33m3308777[m Описана сущность ticket в openApi
+[1;33m|[m [36m|[m * [33m3358462[m mini fix
+[1;33m|[m [36m|[m * [33m58bb6fd[m ADD: queries.cpp/hpp: Add queue/tickets/user queries,
+[1;33m|[m [36m|[m * [33m47c2a87[m ADD: query.cpp: add create/delete query
+[1;33m|[m [36m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[36m|[m   
+* [36m|[m   [33m19139ce[m Merge branch 'clean-project' into 'master'
+[36m|[m[1;36m\[m [36m\[m  
+[36m|[m [1;36m|[m[36m/[m  
+[36m|[m[36m/[m[1;36m|[m   
+[36m|[m * [33mf897de1[m Removed bookmarks files, renamed namespace and added files for sql queries
+[36m|[m[36m/[m  
+*   [33mbffa060[m Merge branch 'yet_another_branch' into 'master'
+[31m|[m[32m\[m  
+[31m|[m * [33m5dee9dd[m FIX: rename bookmarker
+* [32m|[m   [33m6a27db0[m Merge branch 'base' into 'master'
+[33m|[m[34m\[m [32m\[m  
+[33m|[m * [32m\[m   [33m1bea315[m Merge branch 'master' into 'base'
+[33m|[m [32m|[m[33m\[m [32m\[m  
+[33m|[m [32m|[m[33m/[m [32m/[m  
+[33m|[m[33m/[m[32m|[m [32m/[m   
+[33m|[m [32m|[m[32m/[m    
+* [32m/[m [33m2ad0c6b[m Initial commit
+ [32m/[m  
+* [33mb3a95a0[m Upd readme and ci
+* [33m32ab180[m Upd readme and makefile
+* [33mf31bc69[m up userver
+* [33m686286f[m upd makefile
+* [33mca35411[m Add gitlab ci
+* [33mcae6daf[m update task
+* [33m9d5bd39[m update task
+* [33mc5bf1bc[m readme update
+* [33md262270[m configs update
+* [33ma494ab4[m up userver
+*   [33m790c533[m Merge branch 'form-data' into 'master'
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m94f4655[m Add test for multipart/form-data
+[1;31m|[m[1;31m/[m  
+*   [33m7df4cec[m Merge branch 'initial' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33me813c25[m Initial commit
+[1;33m|[m[1;33m/[m  
+* [33m777a04e[m Initial commit
