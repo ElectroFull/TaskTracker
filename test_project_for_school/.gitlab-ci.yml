@@ -1,0 +1,64 @@
+default:
+  before_script:
+    - ls
+
+image:
+  name: ghcr.io/userver-framework/ubuntu-22.04-userver-base-ci:latest
+
+stages:
+  - test
+  - report
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive  # If your project uses submodules
+
+cache:
+  key: "$CI_PROJECT_ID"  # Unique key per project to share cache between pipelines
+  paths:
+    - build_debug/
+    - build_release/
+  policy: pull-push  # Pull at job start and push at job end
+
+test_job:
+  stage: test
+  before_script:
+    - make install
+    - make build-release
+  script:
+    - |
+      # Create a non-root user named 'ci-user'
+      useradd -m -s /bin/bash ci-user
+      
+      # Change ownership of the repository to the new user
+      chown -R ci-user:ci-user $CI_PROJECT_DIR
+      
+      # Switch to the 'ci-user' and run the commands
+      su - ci-user -c "
+        cd $CI_PROJECT_DIR
+        make docker-test-debug
+      "
+      if [ $? -eq 0 ]; then
+        echo "success"
+      else
+        echo "failure"
+        exit 1
+      fi
+
+success_job:
+  stage: report
+  script:
+    - echo "All tests passed successfully."
+  when: on_success
+  needs:
+    - job: test_job
+      artifacts: false  # Avoid waiting for artifacts
+
+failure_job:
+  stage: report
+  script:
+    - echo "One or more tests failed."
+    - exit 1
+  when: on_failure
+  needs:
+    - job: test_job
+      artifacts: false  # Allows the job to run even if test_job failed

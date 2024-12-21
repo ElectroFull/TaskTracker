@@ -1,0 +1,842 @@
+openapi: "3.0.2"
+info:
+    title: task-tracker API
+    version: "1.0"
+servers:
+    -   url: http://localhost:8080/
+
+components:
+    schemas:
+        status:
+            type: object
+            properties:
+                id:
+                    description: status id
+                    type: integer
+                name:
+                    description: status name
+                    type: string
+            required:
+                - id
+                - name
+        ticket:
+            type: object
+            properties:
+                id:
+                    description: ticket identifier
+                    type: string
+                title:
+                    description: ticket title
+                    type: string
+                description:
+                    description: ticket description
+                    type: string
+                author_id:
+                    description: author identifier
+                    type: integer
+                performer_id:
+                    description: current performer identifier
+                    type: integer
+                priority:
+                    description: ticket priority level
+                    type: string
+                    enum:
+                        - LOW
+                        - MEDIUM
+                        - HIGH
+                    default: LOW
+                queue_id:
+                    description: queue identifier
+                    type: integer
+                status_id:
+                    description: status identifier
+                    type: integer
+                start_date:
+                    description: real date when task started
+                    type: string
+                    format: date-time
+                finish_date:
+                    description: real date when task started
+                    type: string
+                    format: date-time
+                deadline_date:
+                    description: real date when task started
+                    type: string
+                    format: date-time
+                created_date:
+                    description: real date when task started
+                    type: string
+                    format: date-time
+                deleted_date:
+                    description: real date when task started
+                    type: string
+                    format: date-time
+            required:
+              - id
+              - title
+              - priority
+              - status_id
+              - author_id
+              - queue_id
+        queue:
+            type: object
+            properties:
+                id:
+                    description: queue identifier
+                    type: integer
+                name:
+                    description: queue name
+                    type: string
+                tickets_count:
+                    description: number of tickets in the current queue
+                    type: integer
+                author_id:
+                    description: author and owner of the current queue
+                    type: integer
+                created_date:
+                    description: the date when queue was created
+                    type: string
+                    format: date-time
+                deleted_date:
+                    description: the date when queue is deleted. if null -> queue
+                        not deleted
+                    type: string
+                    format: date-time
+
+            required:
+                - id
+                - name
+                - author_id
+        comment:
+            type: object
+            properties:
+                id:
+                    description: comment identifier
+                    type: integer
+                message:
+                    description: task comments
+                    type: string
+                ticket_id:
+                    description: ticket indentifier
+                    type: string
+                created_date:
+                    description: comment creation time
+                    type: string
+                    format: date-time
+                deleted_date:
+                    description: comment deletion time
+                    type: string
+                    format: date-time
+            required:
+            - id
+            - message
+            - ticket_id
+    securitySchemes:
+        UserTicketAuth:
+            type: apiKey
+            in: header
+            name: X-Ya-User-Ticket
+    responses:
+        UnauthorizedError:
+            description: X-Ya-User-Ticket key is missing or invalid
+
+
+paths:
+    /v1/register:
+        post:
+            description: create new user
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                login:
+                                    type: string
+                                password:
+                                    type: string
+                            required:
+                                - login
+                                - password
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+               
+    
+    /v1/login:
+        post:
+            description: login to system via credentials
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                login:
+                                    type: string
+                                password:
+                                    type: string
+                            required:
+                                - login
+                                - password
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    session_id:
+                                        type: string
+    
+    /v1/unregister:
+        post:
+            description: unregister user
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                login:
+                                    type: string
+                                password:
+                                    type: string
+                            required:
+                                - login
+                                - password
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted user
+                                        type: integer
+                                required:
+                                    - id
+   
+    /v1/queues:
+        post:
+            description: creates new queue
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    description: queue name
+                                    type: string
+                            required:
+                                - name
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/queue'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+        get:
+            description: list all queues
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/queue'
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+    
+    /v1/queues/{id}:
+        post:
+            description: update queue by its id
+            parameters:
+              - name: id
+                in: path
+                description: queue id
+                required: true
+                schema:
+                    type: integer
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                            required:
+                                - name
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/queue'
+                '400':
+                    description: Invalid input data
+                '404':
+                    description: Queue not found
+        get:
+            description: get queue by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Queue id
+                    required: true
+                    schema:
+                        type: integer
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/queue'
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: queue is not found
+        delete:
+            description: delete queue by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: queue id
+                    required: true
+                    schema:
+                        type: integer
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted queue
+                                        type: integer
+                                required:
+                                    - id
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: queue is not found
+   
+    /v1/queues/{id}/users:
+        get:
+            description: Get the list of users in a specific queue
+            parameters:
+                -   name: id
+                    in: path
+                    description: Identifier of the queue
+                    required: true
+                    schema:
+                        type: integer
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                id:
+                                                    type: integer
+                                                login:
+                                                    type: string
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: Queue not found
+   
+    /v1/queues/{id}/users/{user_id}:
+        post:
+            description: add a user to a specific queue
+            parameters:
+                -   name: id
+                    in: path
+                    description: Identifier of the queue
+                    required: true
+                    schema:
+                        type: integer
+                -   name: user_id
+                    in: path
+                    description: Identifier of the user
+                    required: true
+                    schema:
+                        type: integer
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    queue_id:
+                                        type: integer
+                                    user_id:
+                                        type: integer
+                '400':
+                    description: Invalid input
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: Queue not found
+        delete: 
+            description: Delete a user from a specific queue
+            parameters:
+                -   name: id
+                    in: path
+                    description: Identifier of the queue
+                    required: true
+                    schema:
+                        type: integer
+                -   name: user_id
+                    in: path
+                    description: Identifier of the user
+                    required: true
+                    schema:
+                        type: integer
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                    '200':
+                        description: OK
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        queue_id:
+                                            type: integer
+                                        user_id:
+                                            type: integer
+                                    required:
+                                        - queue_id
+                                        - user_id
+    
+    /v1/tickets:
+        post:
+            description: creates new ticket
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: title of new ticket
+                                    type: string
+                                description:
+                                    description: description of new ticket
+                                    type: string
+                                current_user_id:
+                                    description: who created ticket
+                                    type: integer
+                                performer_id:
+                                    description: who will perform this ticket
+                                    type: integer
+                                priority:
+                                    description: who created ticket
+                                    type: string
+                                    enum:
+                                        - LOW
+                                        - MEDIUM 
+                                        - HIGH
+                                    default: LOW
+                                queue_id:
+                                    description: queue, which contains that ticket
+                                    type: integer
+                                status_id:
+                                    description: start status of this task
+                                    type: integer
+                                deadline_date:
+                                    description: when this task should be competed
+                                    type: string
+                                    format: date-time
+
+                            required:
+                              - title
+                              - current_user_id
+                              - queue_id
+                              - status_id
+
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: string
+                '400':
+                    description: bad request
+    
+    /v1/tickets/{id}:
+        post:
+            description: change ticket fields
+            parameters:
+              - name: id
+                in: path
+                description: ticket id
+                required: true
+                schema:
+                    type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: title of new ticket
+                                    type: string
+                                description:
+                                    description: description of new ticket
+                                    type: string
+                                performer_id:
+                                    description: who will perform this ticket
+                                    type: integer
+                                priority:
+                                    description: who created ticket
+                                    type: string
+                                    enum:
+                                        - LOW
+                                        - MEDIUM
+                                        - HIGH
+                                    default: LOW
+                                queue_id:
+                                    description: queue, which contains that ticket
+                                    type: integer
+                                status_id:
+                                    description: start status of this task
+                                    type: integer
+                                deadline_date:
+                                    description: when this task should be competed
+                                    type: string
+                                    format: date-time
+
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: string
+                '400':
+                    description: bad request
+
+        get:
+            description: get ticket by id
+            parameters:
+              - name: id
+                in: path
+                description: ticket id
+                required: true
+                schema:
+                    type: string
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ticket'
+                '400':
+                    description: bad request
+
+    /v1/queues/{id}/tickets:
+        get:
+            description: get all tickets from queue
+            parameters:
+              - name: id
+                in: path
+                description: Identifier of the queue
+                required: true
+                schema:
+                    type: integer
+
+            security:
+                -   UserTicketAuth: [ ]
+
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema: 
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/ticket'
+
+    /v1/comments:
+        post:
+            description: create new comment
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    description: create new comment
+                                    type: string
+                                ticket_id:
+                                    description: associated ticket
+                                    type: string
+                            required:
+                                - message
+                                - ticket_id
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/comment'
+                '400':
+                    description: invalid input data
+        get:
+            description: get all comments
+
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/comment'
+
+    /v1/comments/{id}:
+        get:
+            description: get comment by its identifier
+            parameters:
+              - name: id
+                in: path
+                description: comment id
+                required: true
+                schema:
+                    type: integer
+
+            security:
+                - UserTicketAuth: []
+
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/comment'
+                '404':
+                    description: Comment not found
+        put:
+            description: Update a comment by its ID
+            parameters:
+              - name: id
+                in: path
+                description: comment id
+                required: true
+                schema:
+                    type: integer
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/comment'
+                '400':
+                    description: Invalid input data
+                '404':
+                    description: Comment not found
+        delete:
+            description: soft deletion of a comment
+            parameters:
+              - name: id
+                in: path
+                description: comment id
+                required: true
+                schema:
+                    type: integer
+
+            security:
+                - UserTicketAuth: []
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted comment
+                                        type: integer
+                                required:
+                                    - id
+                '404':
+                    description: Comment not found
+
+    /v1/statuses:
+        post:
+            description: create new status
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                            required:
+                                - name
+            security:
+                    -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/status'
+                '400':
+                    description: Invalid input data
+        get:
+            description: get all statuses
+
+            security:
+                -   UserTicketAuth: [ ]
+ 
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema: 
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/status'
+    
+    /v1/statuses/{queue_id}:
+        get: 
+            description: get all statuses by queue's identifier
+            parameters:
+              - name: queue_id
+                in: path
+                description: queue id
+                required: true
+                schema: 
+                    type: integer
+            security:
+                -   UserTicketAuth: [ ]
+            
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema: 
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/status'
+ 
+        
+
+
+       
+   
