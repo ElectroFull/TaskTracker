@@ -15,7 +15,7 @@ A **task tracker** with a simple interface in a **Telegram bot**. The service is
 Follow these steps to set up and run the project:
 
 ```bash
-git clone https://github.com/stanislavmg/task-tracker.git
+git clone https://github.com/electrofull/TaskTracker.git
 cd task-tracker
 git submodule update --init --recursive
 make install-release
